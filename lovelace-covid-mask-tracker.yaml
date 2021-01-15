@@ -1,0 +1,326 @@
+button_card_templates:
+  header:
+    layout: vertical
+    color_type: label-card
+    color: 'rgb(127,132,136)'
+    tap_action:
+      action: navigate
+      navigation_path: /lovelace/
+  mask:
+    color_type: card
+    show_name: false
+    state:
+      - value: black
+        color: 'rgb(0,0,0)'
+      - value: pink
+        color: 'rgb(226,146,159)'
+      - value: navy
+        color: 'rgb(0,48,88)'
+      - value: blue
+        color: 'rgb(124,182,212)'
+  mask-record:
+    color_type: card
+    color: 'rgb(127,132,136)'
+    aspect_ratio: 1/1
+  mask-status:
+    color_type: card
+    aspect_ratio: 2/1
+    show_icon: false
+    show_name: false
+    show_state: true
+    show_units: false
+    confirmation:
+      text: Did you replace the old mask?
+title: HA Face Mask Tracker
+views:
+  - title: Face Masks
+    path: facemasks
+    icon: 'mdi:virus-outline'
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: 'custom:button-card'
+            name: Gabriela
+            template: header
+          - type: 'custom:button-card'
+            entity: sensor.covid_mask_gabriela
+            name: Next Mask
+            show_name: false
+            template: mask
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              service_data:
+                entity_id: input_select.covid_mask_gabriela
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: '0:15'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 0.25
+              - type: 'custom:button-card'
+                name: '0:30'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 0.5
+              - type: 'custom:button-card'
+                name: '0:45'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 0.75
+              - type: 'custom:button-card'
+                name: '1:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 1
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: '1:30'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 1.5
+              - type: 'custom:button-card'
+                name: '2:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 2
+              - type: 'custom:button-card'
+                name: '3:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 3
+              - type: 'custom:button-card'
+                name: '4:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: gabriela
+                    time: 4
+          - type: 'custom:button-card'
+            name: Mask Status
+            color_type: label-card
+            styles:
+              card:
+                - height: 40px
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: Black
+                color: 'rgb(0,0,0)'
+                template: mask-status
+                entity: sensor.covid_mask_gabriela_black
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_gabriela_black
+                    value: 0
+              - type: 'custom:button-card'
+                name: Pink
+                color: 'rgb(226,146,159)'
+                template: mask-status
+                entity: sensor.covid_mask_gabriela_pink
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_gabriela_pink
+                    value: 0
+              - type: 'custom:button-card'
+                name: Navy
+                color: 'rgb(0,48,88)'
+                template: mask-status
+                entity: sensor.covid_mask_gabriela_navy
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_gabriela_navy
+                    value: 0
+              - type: 'custom:button-card'
+                name: Blue
+                color: 'rgb(124,182,212)'
+                template: mask-status
+                entity: sensor.covid_mask_gabriela_blue
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_gabriela_blue
+                    value: 0
+      - type: vertical-stack
+        cards:
+          - type: 'custom:button-card'
+            name: Rodrigo
+            template: header
+          - type: 'custom:button-card'
+            entity: sensor.covid_mask_rodrigo
+            name: Next Mask
+            show_name: false
+            template: mask
+            tap_action:
+              action: call-service
+              service: input_select.select_next
+              service_data:
+                entity_id: input_select.covid_mask_rodrigo
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: '0:15'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 0.25
+              - type: 'custom:button-card'
+                name: '0:30'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 0.5
+              - type: 'custom:button-card'
+                name: '0:45'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 0.75
+              - type: 'custom:button-card'
+                name: '1:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 1
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: '1:30'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 1.5
+              - type: 'custom:button-card'
+                name: '2:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 2
+              - type: 'custom:button-card'
+                name: '3:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 3
+              - type: 'custom:button-card'
+                name: '4:00'
+                template: mask-record
+                tap_action:
+                  action: call-service
+                  service: script.covid_record_mask_usage
+                  service_data:
+                    person: rodrigo
+                    time: 4
+          - type: 'custom:button-card'
+            name: Mask Status
+            color_type: label-card
+            styles:
+              card:
+                - height: 40px
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                name: Black
+                color: 'rgb(0,0,0)'
+                template: mask-status
+                entity: sensor.covid_mask_rodrigo_black
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_rodrigo_black
+                    value: 0
+              - type: 'custom:button-card'
+                name: Pink
+                color: 'rgb(226,146,159)'
+                template: mask-status
+                entity: sensor.covid_mask_rodrigo_pink
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_rodrigo_pink
+                    value: 0
+              - type: 'custom:button-card'
+                name: Navy
+                color: 'rgb(0,48,88)'
+                template: mask-status
+                entity: sensor.covid_mask_rodrigo_navy
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_rodrigo_navy
+                    value: 0
+              - type: 'custom:button-card'
+                name: Blue
+                color: 'rgb(124,182,212)'
+                template: mask-status
+                entity: sensor.covid_mask_rodrigo_blue
+                tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.covid_mask_rodrigo_blue
+                    value: 0

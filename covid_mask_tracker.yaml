@@ -1,0 +1,197 @@
+input_select:
+  covid_mask_gabriela:
+    options:
+      - black
+      - pink
+      - navy
+      - blue
+  covid_mask_rodrigo:
+    options:
+      - black
+      - pink
+      - navy
+      - blue
+
+input_number:
+  covid_mask_gabriela_black:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+  covid_mask_gabriela_pink:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+  covid_mask_gabriela_navy:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+  covid_mask_gabriela_blue:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+
+  covid_mask_rodrigo_black:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+  covid_mask_rodrigo_pink:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+  covid_mask_rodrigo_navy:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+  covid_mask_rodrigo_blue:
+    min: 0
+    max: 20
+    step: 0.25
+    mode: box
+    unit_of_measurement: h
+    icon: mdi:timer-sand
+
+script:
+
+  covid_record_mask_usage:
+    alias: COVID Record Mask Usage
+    fields:
+      person:
+        description: 'Person to record time for (gabriela, rodrigo)'
+        example: 'gabriela'
+      time:
+        description: 'The time the mask was used in 0.25 increments'
+        example: 0.25
+    sequence:
+    - service: input_number.set_value
+      data_template:
+        entity_id: >-
+          {% set color_entity = "input_select.covid_mask_"+person %}
+          {% set color = states(color_entity) %}
+          {% set time_entity = "input_number.covid_mask_"+person+"_"+color %}
+          {{ time_entity }}
+        value: >-
+          {% set color_entity = "input_select.covid_mask_"+person %}
+          {% set color = states(color_entity) %}
+          {% set time_entity = "input_number.covid_mask_"+person+"_"+color %}
+          {% set old_time = states(time_entity)|float %}
+          {{old_time + time}}
+    - delay: 00:00:01
+    - service: input_select.select_next
+      data_template:
+        entity_id: 'input_select.covid_mask_{{person}}'
+
+sensor:
+  - platform: template
+    sensors:
+
+      covid_mask_gabriela:
+        value_template: "{{states('input_select.covid_mask_gabriela')}}"
+        icon_template: >-
+          {% set color_entity = "input_select.covid_mask_gabriela" %}
+          {% set color = states(color_entity) %}
+          {% set time_entity = "input_number.covid_mask_gabriela_"+color %}
+          {% if states(time_entity)|float < 8 %}
+            mdi:face-mask
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+      covid_mask_gabriela_black:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_gabriela_black')|float < 8 %}
+            {{ states('input_number.covid_mask_gabriela_black')|float }}
+          {% else %}
+            EOL
+          {% endif %}
+      covid_mask_gabriela_pink:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_gabriela_pink')|float < 8 %}
+            {{ states('input_number.covid_mask_gabriela_pink')|float }}
+          {% else %}
+            EOL
+          {% endif %}
+      covid_mask_gabriela_navy:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_gabriela_navy')|float < 8 %}
+            {{ states('input_number.covid_mask_gabriela_navy')|float }}
+          {% else %}
+            EOL
+          {% endif %}
+      covid_mask_gabriela_blue:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_gabriela_blue')|float < 8 %}
+            {{ states('input_number.covid_mask_gabriela_blue')|float }}
+          {% else %}
+            EOL
+          {% endif %}
+
+
+      covid_mask_rodrigo:
+        value_template: "{{states('input_select.covid_mask_rodrigo')}}"
+        icon_template: >-
+          {% set color_entity = "input_select.covid_mask_rodrigo" %}
+          {% set color = states(color_entity) %}
+          {% set time_entity = "input_number.covid_mask_rodrigo_"+color %}
+          {% if states(time_entity)|float < 8 %}
+            mdi:face-mask
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+      covid_mask_rodrigo_black:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_rodrigo_black')|float < 8 %}
+            {{ states('input_number.covid_mask_rodrigo_black')|float }}
+          {% else %}
+            EOL
+          {% endif %}
+      covid_mask_rodrigo_pink:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_rodrigo_pink')|float < 8 %}
+            {{ states('input_number.covid_mask_rodrigo_pink')|float }}
+          {% else %}
+            EOL
+          {% endif %}
+      covid_mask_rodrigo_navy:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_rodrigo_navy')|float < 8 %}
+            {{ states('input_number.covid_mask_rodrigo_navy')|float }}
+          {% else %}
+            EOL
+          {% endif %}
+      covid_mask_rodrigo_blue:
+        unit_of_measurement: h
+        value_template: >-
+          {% if states('input_number.covid_mask_rodrigo_blue')|float < 8 %}
+            {{ states('input_number.covid_mask_rodrigo_blue')|float }}
+          {% else %}
+            EOL
+          {% endif %}
