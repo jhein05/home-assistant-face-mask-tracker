@@ -1,6 +1,8 @@
 # home-assistant-face-mask-tracker
 Simple HA config to rotate and keep track of multiple face masks during the SARS-CoV-2 Covid19 pandemic
 
+Requirements:
+* https://github.com/custom-cards/button-card (install via HACS)
 
 ![Frontend](https://raw.githubusercontent.com/jhein05/home-assistant-face-mask-tracker/main/screenshots/frontend.jpg)
 
